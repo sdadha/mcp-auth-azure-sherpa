@@ -246,4 +246,4 @@ async with Agent(client=client, tools=mcp_tool) as agent:
 
 - [MCP Protocol Specification](https://modelcontextprotocol.io/)
 - [Microsoft Agent Framework](https://github.com/microsoft/agent-framework)
-- [MCP Protocol specification](https://modelcontextprotocol.io/)
+- [MCP Security Workshop](https://aka.ms/sherpa)
