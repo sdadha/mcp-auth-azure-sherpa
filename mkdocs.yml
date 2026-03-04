@@ -37,8 +37,6 @@ theme:
     - navigation.instant
     - navigation.tracking
     - navigation.tabs
-    - navigation.sections
-    - navigation.expand
     - navigation.top
     - navigation.footer
     - search.suggest
@@ -80,7 +78,13 @@ nav:
     - Camp 1 - Identity: camps/camp1-identity.md
     - Camp 2 - Gateway: camps/camp2-gateway.md
     - Camp 3 - I/O Security: camps/camp3-io-security.md
-    - Camp 4 - Monitoring: camps/camp4-monitoring.md
+    - Camp 4 - Monitoring:
+      - "Overview & Deploy": camps/camp4-monitoring/index.md
+      - Gateway Logging: camps/camp4-monitoring/section1-apim-logging.md
+      - Function Observability: camps/camp4-monitoring/section2-function-observability.md
+      - Dashboards & Alerts: camps/camp4-monitoring/section3-dashboards-alerts.md
+      - Incident Response: camps/camp4-monitoring/section4-incident-response.md
+      - Reference: camps/camp4-monitoring/reference.md
     - The Summit: camps/summit.md
   - Resources:
     - Contributing: resources/contributing.md

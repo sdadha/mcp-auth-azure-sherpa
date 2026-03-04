@@ -84,7 +84,7 @@ Your journey follows a proven camp-to-camp progression. Each stage builds on the
     **Observation Peak** - Implement Log Analytics, dashboards, and automated threat detection  
     *OWASP Risks: [MCP08](https://microsoft.github.io/mcp-azure-security-guide/mcp/mcp08-telemetry/)*
 
-    [:octicons-arrow-right-24: Watch the horizon](camps/camp4-monitoring.md)
+    [:octicons-arrow-right-24: Watch the horizon](camps/camp4-monitoring/index.md)
 
 - :material-summit:{ .lg .middle } __The Summit__
 

@@ -1056,7 +1056,7 @@ az ad app delete --id $APIM_APP_ID
 
 **Continue your ascent:**
 
-- **[Camp 4: Monitoring & Response](camp4-monitoring.md)** — Detect and respond to security incidents with Azure Monitor
+- **[Camp 4: Monitoring & Response](camp4-monitoring/index.md)** — Detect and respond to security incidents with Azure Monitor
 
 **Or dive deeper:**
 
@@ -1066,4 +1066,4 @@ az ad app delete --id $APIM_APP_ID
 
 ---
 
-← [Camp 2: Gateway](camp2-gateway.md) | [Camp 4: Monitoring](camp4-monitoring.md) →
+← [Camp 2: Gateway](camp2-gateway.md) | [Camp 4: Monitoring](camp4-monitoring/index.md) →

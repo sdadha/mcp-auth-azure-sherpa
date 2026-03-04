@@ -1725,7 +1725,7 @@ az ad app delete --id $APIM_APP_ID
 **Continue your ascent:**
 
 - **[Camp 3: Input/Output Security](camp3-io-security.md)** - Validate and sanitize MCP tool inputs and outputs
-- **[Camp 4: Monitoring & Response](camp4-monitoring.md)** - Detect and respond to security incidents with Azure Monitor
+- **[Camp 4: Monitoring & Response](camp4-monitoring/index.md)** - Detect and respond to security incidents with Azure Monitor
 
 **Or dive deeper:**
 
