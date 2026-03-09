@@ -182,12 +182,60 @@ Without authentication, your MCP server is completely open to the internet. For 
     }
     ```
 
+    ??? note "PRM endpoint policy"
+        The PRM operation uses `<return-response>` *before* `<base />` so the response is returned immediately, skipping OAuth validation (otherwise the discovery endpoint itself would require a token):
+
+        ```xml
+        <inbound>
+            <!-- Return immediately - skip OAuth validation -->
+            <return-response>
+                <set-status code="200" reason="OK" />
+                <set-header name="Content-Type" exists-action="override">
+                    <value>application/json</value>
+                </set-header>
+                <set-body>@{
+                    return JsonConvert.SerializeObject(new {
+                        resource = "{{apim-gateway-url}}/sherpa/mcp",
+                        authorization_servers = new[] {
+                            "https://login.microsoftonline.com/{{tenant-id}}/v2.0"
+                        },
+                        scopes_supported = new[] {
+                            "{{mcp-app-client-id}}/user_impersonate"
+                        },
+                        bearer_methods_supported = new[] { "header" }
+                    });
+                }</set-body>
+            </return-response>
+        </inbound>
+        ```
+
     **2. OAuth Validation Policy**  
     Applies token validation to the Sherpa MCP API that:
     
     - Validates Entra ID tokens against your tenant
     - Checks the token audience matches your MCP app
     - Returns a proper 401 with PRM discovery link on failure
+
+    ??? note "JWT validation policy"
+        The `validate-azure-ad-token` element does the heavy lifting -- it verifies the token issuer, audience, and required scopes in a single policy block:
+
+        ```xml
+        <inbound>
+            <base />
+            <validate-azure-ad-token tenant-id="{{tenant-id}}"
+                                      failed-validation-httpcode="401"
+                                      failed-validation-error-message="Unauthorized">
+                <audiences>
+                    <audience>{{mcp-app-client-id}}</audience>
+                </audiences>
+                <required-claims>
+                    <claim name="scp" match="any">
+                        <value>user_impersonate</value>
+                    </claim>
+                </required-claims>
+            </validate-azure-ad-token>
+        </inbound>
+        ```
 
     When authentication fails, APIM returns:
 
@@ -199,7 +247,7 @@ Without authentication, your MCP server is completely open to the internet. For 
     This tells OAuth clients where to discover authentication requirements.
 
     !!! note "APIM Native MCP Behavior"
-        When using APIM's native MCP type (`apiType: mcp`), APIM automatically prepends the API path to `resource_metadata` URLs in WWW-Authenticate headers. Your policy should omit the API path from the header value—APIM adds it for you.
+        When using APIM's native MCP type (`apiType: mcp`), APIM automatically prepends the API path to `resource_metadata` URLs in WWW-Authenticate headers. Your policy should omit the API path from the header value -- APIM adds it for you.
 
     ??? info "What is Protected Resource Metadata (RFC 9728)?"
         **RFC 9728** defines PRM as a standard for OAuth autodiscovery. Instead of manually configuring:
